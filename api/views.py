@@ -161,6 +161,9 @@ class Analytics(generics.GenericAPIView):
     3. Top 5 selling products by the QUANTITY sold.
     4. The employee who has sold the most QUANTITY.
     """
+    # class DummySerializer(serializers.Serializer):
+    #     pass
+    
     # JWT authentication
     authentication_classes = [JWTAuthentication, SessionAuthentication]
     permission_classes = [permissions.IsAuthenticated]

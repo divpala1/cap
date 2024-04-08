@@ -1,55 +1,10 @@
 from django.urls import path
 from . import views
 
-# Python code for making requests to the API from another Python application
-"""
-======================================================================
-Demo request for adding an employee to the database from another Python application:
-======================================================================
-import requests
-import json
-
-url = 'http://localhost:8000/api/employees/'
-
-data = {
-    'name': 'John Doe',
-    'emp_id': 101,
-    'salary': 50000
-}
-
-response = requests.post(url, data=json.dumps(data), headers={'Content-Type': 'application/json'})
-print(response.status_code)
-
-======================================================================
-Demo request for updating an employee in the database from another Python application:
-======================================================================
-import requests
-import json
-
-url = 'http://localhost:8000/api/employees/101/'
-
-data = {
-    'name': 'John Doe',
-    'emp_id': 101,
-    'salary': 60000
-}
-
-response = requests.put(url, data=json.dumps(data), headers={'Content-Type': 'application/json'})
-print(response.status_code)
-
-======================================================================
-Demo request for deleting an employee from the database from another Python application:
-======================================================================
-import requests
-import json
-
-url = 'http://localhost:8000/api/employees/101/'
-
-response = requests.delete(url)
-print(response.status_code)
-"""
-
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+
+from drf_spectacular.views import SpectacularAPIView
+from drf_spectacular.views import SpectacularRedocView, SpectacularSwaggerView
 
 urlpatterns = [
     # Employees API
@@ -74,7 +29,14 @@ urlpatterns = [
     
     # jwt
     path('token/get/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh')
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    
+    # DRF Spectacular URLs
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    # Swagger UI:
+    path('', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    # Redoc UI:
+    path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
 ]
 
 """

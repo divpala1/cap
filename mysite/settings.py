@@ -29,7 +29,9 @@ INSTALLED_APPS = [
     
     'api',
     'rest_framework',
-    'rest_framework_simplejwt'
+    'rest_framework_simplejwt',
+    
+    'drf_spectacular'
 ]
 
 DEFAULT_AUTHENTICATION_CLASSES = (
@@ -120,3 +122,15 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# DRF Spectacular Settings
+REST_FRAMEWORK = {
+    # DRF settings here
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Spacey Capital API',
+    'DESCRIPTION': 'This is the official API documentation.',
+    'SERVE_INCLUDE_SCHEMA': False
+}
